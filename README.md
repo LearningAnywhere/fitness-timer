@@ -1,3 +1,7 @@
+# Fitness timer app
+
+Create timers with a custom number of intervals. You can duplicate and repeat intervals, or make each one unique. This will help simplify things like Tabata training, or holding stretches for a given amount of time and for a given number of reps.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
