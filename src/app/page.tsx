@@ -55,13 +55,13 @@ export default function Home() {
           {!isTimerRunning ? (
             <Button
               label={"Start Timer"}
-              color={"blue"}
+              type={"start"}
               onClick={handleStartTimer}
             />
           ) : (
-            <Button label={"Stop"} color={"red"} onClick={handleStopTimer} />
+            <Button label={"Stop"} type={"stop"} onClick={handleStopTimer} />
           )}
-          {<Button label={"Reset"} color={"gray"} onClick={handleReset} />}
+          {<Button label={"Reset"} type={"reset"} onClick={handleReset} />}
         </div>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">

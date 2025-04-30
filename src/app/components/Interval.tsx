@@ -1,3 +1,5 @@
+"use client";
+
 interface IntervalProps {
   name: string;
   duration: number;

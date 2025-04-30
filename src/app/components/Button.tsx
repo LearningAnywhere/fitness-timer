@@ -1,14 +1,31 @@
+"use client";
+
 interface ButtonProps {
   label: string;
   onClick: () => void;
-  color?: string;
+  type?: "start" | "stop" | "reset";
 }
 
+const getColor = (type: string) => {
+  switch (type) {
+    case "start":
+      return "bg-blue-500";
+    case "stop":
+      return "bg-red-500";
+    case "reset":
+      return "bg-gray-500";
+    default:
+      return "bg-blue-500";
+  }
+};
+
 export const Button = (params: ButtonProps) => {
-  const { label, onClick, color = "blue" } = params;
+  const { label, onClick, type = "start" } = params;
+  const color = getColor(type);
+
   return (
     <button
-      className={`bg-${color}-500 text-white px-4 py-2 rounded hover:bg-${color}-600`}
+      className={`${color} text-white px-4 py-2 rounded`}
       onClick={onClick}
     >
       {label}
