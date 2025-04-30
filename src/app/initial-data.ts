@@ -1,11 +1,13 @@
-import { Interval } from "./types";
+import { TInterval } from "./types";
 
-export const froggy: Interval = {
+const froggy: TInterval = {
   name: "Froggy",
   duration: 5,
 };
 
-export const intervalBreak: Interval = {
+const TIntervalBreak: TInterval = {
   name: "Break",
   duration: 2,
 };
+
+export const intervals: TInterval[] = [froggy, TIntervalBreak];
