@@ -3,15 +3,9 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-type Interval = {
-  name: string;
-  duration: number;
-};
-
-const froggy: Interval = {
-  name: "Froggy",
-  duration: 5,
-};
+import { froggy } from "./initial-data";
+import { Button } from "./components/Button";
+import { Interval } from "./components/Interval";
 
 export default function Home() {
   const [isTimerRunning, setIsTimerRunning] = useState(false);
@@ -50,38 +44,24 @@ export default function Home() {
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <h1>Stretches</h1>
-        <div>
-          <p>{`Name: ${froggy.name}`}</p>
-          <p>{`Duration: ${froggy.duration} seconds`}</p>
-          {(timeLeft < froggy.duration || isTimerRunning) && (
-            <p>{`Time left: ${timeLeft} seconds`}</p>
-          )}
-        </div>
+        <Interval
+          name={froggy.name}
+          duration={froggy.duration}
+          timeLeft={timeLeft}
+          isTimerRunning={isTimerRunning}
+        />
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           {!isTimerRunning ? (
-            <button
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            <Button
+              label={"Start Timer"}
+              color={"blue"}
               onClick={handleStartTimer}
-            >
-              Start Timer
-            </button>
+            />
           ) : (
-            <button
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-              onClick={handleStopTimer}
-            >
-              Stop
-            </button>
+            <Button label={"Stop"} color={"red"} onClick={handleStopTimer} />
           )}
-          {
-            <button
-              className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-              onClick={handleReset}
-            >
-              Reset
-            </button>
-          }
+          {<Button label={"Reset"} color={"gray"} onClick={handleReset} />}
         </div>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
