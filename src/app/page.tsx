@@ -35,10 +35,16 @@ export default function Home() {
     }
     // If time left is 0, and there are more intervals, move to the next interval
     else if (timeLeft === 0 && currentIntervalIndex < intervals.length - 1) {
-      setCurrentIntervalIndex((prevIndex) => prevIndex + 1);
-      setTimeLeft(intervals[currentIntervalIndex + 1].duration);
+      const nextIntervalIndex = currentIntervalIndex + 1;
+      const nextIntervalDuration = intervals[nextIntervalIndex].duration;
+      updateTimerStatus(nextIntervalIndex, nextIntervalDuration);
     }
   }, [timeLeft]);
+
+  const updateTimerStatus = (index: number, timeLeft: number) => {
+    setCurrentIntervalIndex(index);
+    setTimeLeft(timeLeft);
+  };
 
   const handleStartTimer = () => {
     setIsTimerRunning(true);
@@ -48,10 +54,23 @@ export default function Home() {
     setIsTimerRunning(false);
   };
 
+  const handleSkip = () => {
+    // Skip to the next interval
+    if (currentIntervalIndex < intervals.length - 1) {
+      // TODO: Write helper function to abstract
+      const nextIntervalIndex = currentIntervalIndex + 1;
+      const nextIntervalDuration = intervals[nextIntervalIndex].duration;
+      updateTimerStatus(nextIntervalIndex, nextIntervalDuration);
+    } else {
+      // If there are no more intervals, stop the timer
+      setIsTimerRunning(false);
+      alert("No more intervals to skip to.");
+    }
+  };
+
   // Reset the timer to the first interval and stop the timer
   const handleReset = () => {
-    setCurrentIntervalIndex(0);
-    setTimeLeft(intervals[0].duration);
+    updateTimerStatus(0, intervals[0].duration);
     setIsTimerRunning(false);
   };
 
@@ -86,6 +105,7 @@ export default function Home() {
           isTimerRunning={isTimerRunning}
           handleStartTimer={handleStartTimer}
           handleStopTimer={handleStopTimer}
+          handleSkip={handleSkip}
           handleReset={handleReset}
         />
       </main>
