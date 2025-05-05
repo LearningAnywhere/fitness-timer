@@ -3,7 +3,7 @@
 interface ButtonProps {
   label: string;
   onClick: () => void;
-  type?: "start" | "stop" | "reset";
+  type?: "start" | "stop" | "skip" | "reset";
 }
 
 const getColor = (type: string) => {
@@ -12,6 +12,8 @@ const getColor = (type: string) => {
       return "bg-blue-500";
     case "stop":
       return "bg-red-500";
+    case "skip":
+      return "bg-yellow-500";
     case "reset":
       return "bg-gray-500";
     default:
