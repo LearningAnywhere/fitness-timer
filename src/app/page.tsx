@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 
 import { intervals } from "./initial-data";
 import { TInterval } from "./types";
-import { Button } from "./components/Button";
 import { Interval } from "./components/Interval";
+import { ButtonGroup } from "./components/ButtonGroup";
 
 export default function Home() {
   const [currentIntervalIndex, setCurrentIntervalIndex] = useState<number>(0);
@@ -65,11 +65,11 @@ export default function Home() {
   };
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center max-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start max-h-screen">
         <h1 className="text-lg font-bold">Stretches</h1>
 
-        <div className="flex gap-4 items-center flex-col">
+        <div className="flex gap-4 items-center flex-col overflow-y-auto max-h-screen">
           {intervals.map((interval, index) => (
             <Interval
               key={index}
@@ -82,18 +82,12 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          {!isTimerRunning ? (
-            <Button
-              label={"Start Timer"}
-              type={"start"}
-              onClick={handleStartTimer}
-            />
-          ) : (
-            <Button label={"Stop"} type={"stop"} onClick={handleStopTimer} />
-          )}
-          {<Button label={"Reset"} type={"reset"} onClick={handleReset} />}
-        </div>
+        <ButtonGroup
+          isTimerRunning={isTimerRunning}
+          handleStartTimer={handleStartTimer}
+          handleStopTimer={handleStopTimer}
+          handleReset={handleReset}
+        />
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         Ashley Newton
