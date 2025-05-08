@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { intervals } from "./initial-data";
 import { TInterval } from "./types";
@@ -13,6 +13,8 @@ export default function Home() {
   const [timeLeft, setTimeLeft] = useState<number>(intervals[0].duration);
 
   const currentInterval: TInterval = intervals[currentIntervalIndex];
+
+  const activeIntervalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Decrement the time left every second
@@ -46,8 +48,19 @@ export default function Home() {
     setTimeLeft(timeLeft);
   };
 
+  const scrollToActiveInterval = () => {
+    // Scroll to the active interval
+    if (activeIntervalRef.current) {
+      activeIntervalRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
   const handleStartTimer = () => {
     setIsTimerRunning(true);
+    scrollToActiveInterval();
   };
 
   const handleStopTimer = () => {
@@ -57,10 +70,10 @@ export default function Home() {
   const handleSkip = () => {
     // Skip to the next interval
     if (currentIntervalIndex < intervals.length - 1) {
-      // TODO: Write helper function to abstract
       const nextIntervalIndex = currentIntervalIndex + 1;
       const nextIntervalDuration = intervals[nextIntervalIndex].duration;
       updateTimerStatus(nextIntervalIndex, nextIntervalDuration);
+      scrollToActiveInterval();
     } else {
       // If there are no more intervals, stop the timer
       setIsTimerRunning(false);
@@ -72,6 +85,7 @@ export default function Home() {
   const handleReset = () => {
     updateTimerStatus(0, intervals[0].duration);
     setIsTimerRunning(false);
+    scrollToActiveInterval();
   };
 
   const getIsActive = (index: number) => {
@@ -86,8 +100,9 @@ export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center max-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start max-h-screen">
-        <h1 className="text-lg font-bold">Stretches</h1>
+        <h1 className="text-lg font-bold">Physical Therapy</h1>
 
+        <h2 className="text-2xl font-bold">Stretches</h2>
         <div className="flex gap-4 items-center flex-col overflow-y-auto max-h-screen">
           {intervals.map((interval, index) => (
             <Interval
@@ -97,6 +112,7 @@ export default function Home() {
               timeLeft={timeLeft}
               isTimerRunning={isTimerRunning}
               isActive={getIsActive(index)}
+              ref={index === currentIntervalIndex ? activeIntervalRef : null}
             />
           ))}
         </div>
