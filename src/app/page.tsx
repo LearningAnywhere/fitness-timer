@@ -99,7 +99,7 @@ export default function Home() {
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center max-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start max-h-screen">
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start max-h-[80vh]">
         <h1 className="text-lg font-bold">Physical Therapy</h1>
 
         <h2 className="text-2xl font-bold">Stretches</h2>
