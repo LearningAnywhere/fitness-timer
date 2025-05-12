@@ -6,6 +6,7 @@ interface IntervalProps {
   timeLeft: number;
   isTimerRunning: boolean;
   isActive?: boolean;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
 const getColor = (isActive: boolean) => {
@@ -13,10 +14,17 @@ const getColor = (isActive: boolean) => {
 };
 
 export const Interval = (params: IntervalProps) => {
-  const { name, duration, timeLeft, isTimerRunning, isActive = false } = params;
+  const {
+    name,
+    duration,
+    timeLeft,
+    isTimerRunning,
+    isActive = false,
+    ref = null,
+  } = params;
   const color = getColor(isActive);
   return (
-    <div className={`${color} p-4 rounded-md shadow-md`}>
+    <div className={`${color} p-4 rounded-md shadow-md`} ref={ref}>
       <p>{`Name: ${name}`}</p>
       <p>{`Duration: ${duration} seconds`}</p>
       {isActive && (timeLeft < duration || isTimerRunning) && (
