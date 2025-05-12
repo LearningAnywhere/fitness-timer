@@ -1,14 +1,14 @@
 import { test, expect } from "@playwright/test";
 
 test("has title", async ({ page }) => {
-  await page.goto("http://localhost:3000/");
+  await page.goto("/");
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle("Fitness Timer");
 });
 
 test("start and stop timer buttons", async ({ page }) => {
-  await page.goto("http://localhost:3000/");
+  await page.goto("/");
 
   // Click the start timer button.
   await page.getByRole("button", { name: "Start Timer" }).click();
@@ -22,7 +22,7 @@ test("start and stop timer buttons", async ({ page }) => {
 });
 
 test("starting the timer shows the active interval", async ({ page }) => {
-  await page.goto("http://localhost:3000/");
+  await page.goto("/");
 
   // Expect no active interval to be visible.
   await expect(page.getByText("Time left:")).not.toBeVisible();
