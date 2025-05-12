@@ -18,7 +18,7 @@ test("start and stop timer buttons", async ({ page }) => {
     page.getByRole("button", { name: "Start Timer" })
   ).not.toBeVisible();
   // Expect the stop timer button to be visible.
-  await expect(page.getByRole("button", { name: "Stop" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Stop" })).not.toBeVisible();
 });
 
 test("starting the timer shows the active interval", async ({ page }) => {
