@@ -9,6 +9,7 @@ import { ButtonGroup } from "./components/ButtonGroup";
 
 export default function Home() {
   const [currentIntervalIndex, setCurrentIntervalIndex] = useState<number>(0);
+
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
   const [timeLeft, setTimeLeft] = useState<number>(intervals[0].duration);
 
@@ -37,11 +38,9 @@ export default function Home() {
     }
     // If time left is 0, and there are more intervals, move to the next interval
     else if (timeLeft === 0 && currentIntervalIndex < intervals.length - 1) {
-      const nextIntervalIndex = currentIntervalIndex + 1;
-      const nextIntervalDuration = intervals[nextIntervalIndex].duration;
-      updateTimerStatus(nextIntervalIndex, nextIntervalDuration);
+      handleSkip();
     }
-  }, [timeLeft]);
+  }, [timeLeft, currentIntervalIndex, intervals]);
 
   const updateTimerStatus = (index: number, timeLeft: number) => {
     setCurrentIntervalIndex(index);
@@ -68,6 +67,7 @@ export default function Home() {
   };
 
   const handleSkip = () => {
+    // TODO: Handle how to show the interval was skipped if the timer is not running
     // Skip to the next interval
     if (currentIntervalIndex < intervals.length - 1) {
       const nextIntervalIndex = currentIntervalIndex + 1;
@@ -85,7 +85,7 @@ export default function Home() {
   const handleReset = () => {
     updateTimerStatus(0, intervals[0].duration);
     setIsTimerRunning(false);
-    scrollToActiveInterval();
+    // TODO: Scroll to the top of the page
   };
 
   const getIsActive = (index: number) => {
@@ -124,6 +124,9 @@ export default function Home() {
           handleSkip={handleSkip}
           handleReset={handleReset}
         />
+        <div>
+          Intervals left: {intervals.length - (currentIntervalIndex + 1)}
+        </div>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         Ashley Newton
