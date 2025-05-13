@@ -2,7 +2,11 @@
 
 import { useEffect, useState, useRef } from "react";
 
-import { intervals } from "./initial-data";
+import {
+  //intervals,
+  // TODO: Move this to a mock file when API is ready
+  testIntervals as intervals,
+} from "./initial-data";
 import { TInterval } from "./types";
 import { Interval } from "./components/Interval";
 import { ButtonGroup } from "./components/ButtonGroup";

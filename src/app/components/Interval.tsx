@@ -25,7 +25,9 @@ export const Interval = (params: IntervalProps) => {
   const color = getColor(isActive);
   return (
     <div className={`${color} p-4 rounded-md shadow-md`} ref={ref}>
-      <p>{`Name: ${name}`}</p>
+      <p
+        data-testid={isActive ? "active-interval-name" : undefined}
+      >{`Name: ${name}`}</p>
       <p>{`Duration: ${duration} seconds`}</p>
       {isActive && (timeLeft < duration || isTimerRunning) && (
         <p className="font-bold">{`Time left: ${timeLeft} seconds`}</p>
