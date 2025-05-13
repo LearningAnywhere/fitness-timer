@@ -54,7 +54,7 @@ export default function Home() {
         <h2 className="text-2xl pt-5 font-bold w-full text-center">
           Stretches
         </h2>
-        <div className="flex gap-4 items-center flex-col overflow-y-auto max-h-screen bg-gray-50 p-4 rounded-md w-[40vh]">
+        <div className="flex gap-4 items-center flex-col overflow-y-auto max-h-screen bg-gray-50 p-4 rounded-md w-[40vh] border border-gray-300">
           {intervals.map((interval, index) => (
             <Interval
               key={index}
