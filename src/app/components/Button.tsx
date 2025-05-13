@@ -27,7 +27,7 @@ export const Button = (params: ButtonProps) => {
 
   return (
     <button
-      className={`${color} text-white px-4 py-2 rounded`}
+      className={`${color} text-white px-4 py-2 rounded text-nowrap`}
       onClick={onClick}
     >
       {label}

@@ -18,7 +18,7 @@ export const ButtonGroup = (params: ButtonGroupProps) => {
   } = params;
 
   return (
-    <div className="flex gap-4 items-center flex-col sm:flex-row">
+    <div className="flex gap-4 items-center flex-row flex-wrap justify-center w-full">
       {!isTimerRunning ? (
         <Button
           label={"Start Timer"}

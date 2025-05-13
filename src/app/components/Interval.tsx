@@ -24,7 +24,7 @@ export const Interval = (params: IntervalProps) => {
   } = params;
   const color = getColor(isActive);
   return (
-    <div className={`${color} p-4 rounded-md shadow-md`} ref={ref}>
+    <div className={`${color} p-4 rounded-md shadow-md w-full`} ref={ref}>
       <p
         data-testid={isActive ? "active-interval-name" : undefined}
       >{`Name: ${name}`}</p>
